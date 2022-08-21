@@ -22,13 +22,9 @@
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
-                        "aot": true,
                         "optimization": false,
                         "outputHashing": "all",
                         "sourceMap": true,
-                        "namedChunks": false,
-                        "extractLicenses": true,
-                        "vendorChunk": false,
                         "buildOptimizer": false,
                         "budgets": [
                             {
@@ -58,8 +54,7 @@
                                     "replace": "src/environments/environment.ts",
                                     "with": "src/environments/environment.dev.ts"
                                 }
-                            ],
-                            "sourceMap": true
+                            ]
                         },
                         "prod": {
                             "fileReplacements": [
@@ -72,7 +67,8 @@
                             "buildOptimizer": true,
                             "optimization": true
                         }
-                    }
+                    },
+                    "defaultConfiguration": ""
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
