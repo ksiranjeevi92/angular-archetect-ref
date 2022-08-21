@@ -2,14 +2,16 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
 
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { firestore } from 'firebase/app';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+//import  { firestore }  from 'firebase/app';
+import { serverTimestamp } from "firebase/firestore";
 
 import { Observable, from, of } from 'rxjs';
 import { map, switchMap, catchError, take, tap, withLatestFrom } from 'rxjs/operators';
 
-import { environment } from '@src/environments/environment';
+//import { environment } from '@src/environments/environment';
+import { environment } from '../../../environments/environment';
 
 import { User } from './user.models';
 
@@ -53,7 +55,7 @@ export class UserEffects {
         ofType(fromActions.Types.SIGN_IN_EMAIL),
         map((action: fromActions.SignInEmail) => action.credentials),
         switchMap(credentials =>
-            from(this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password)).pipe(
+            from(this.afAuth.signInWithEmailAndPassword(credentials.email, credentials.password)).pipe(
                 switchMap(signInState =>
                     this.afs.doc<User>(`users/${signInState.user.uid}`).valueChanges().pipe(
                         take(1),
@@ -76,11 +78,14 @@ export class UserEffects {
         ofType(fromActions.Types.SIGN_UP_EMAIL),
         map((action: fromActions.SignUpEmail) => action.credentials),
         switchMap(credentials =>
-            from(this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password)).pipe(
+            from(this.afAuth.createUserWithEmailAndPassword(credentials.email, credentials.password)).pipe(
                 tap(() => {
-                    this.afAuth.auth.currentUser.sendEmailVerification(
-                        environment.firebase.actionCodeSettings
-                    );
+                    this.afAuth.currentUser.
+                    then((user) => {
+                        return user.sendEmailVerification(
+                            environment.firebase.actionCodeSettings
+                        )
+                    })
                     this.router.navigate(['/auth/email-confirm']);
                 }),
                 map((signUpState) => new fromActions.SignUpEmailSuccess(signUpState.user.uid)),
@@ -96,7 +101,7 @@ export class UserEffects {
     signOut: Observable<Action> = this.actions.pipe(
         ofType(fromActions.Types.SIGN_OUT),
         switchMap(() =>
-            from(this.afAuth.auth.signOut()).pipe(
+            from(this.afAuth.signOut()).pipe(
                 map(() => new fromActions.SignOutSuccess()),
                 catchError(err => of(new fromActions.SignOutError(err.message)))
             )
@@ -112,7 +117,7 @@ export class UserEffects {
             ...user,
             uid: state.uid,
             email: state.email,
-            created: firestore.FieldValue.serverTimestamp()
+            created: serverTimestamp()
         })),
         switchMap((user: User) =>
             from(this.afs.collection('users').doc(user.uid).set(user)).pipe(

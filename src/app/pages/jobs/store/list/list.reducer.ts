@@ -25,7 +25,8 @@ export function reducer(state: ListState = initialState, action: fromActions.All
         }
 
         case fromActions.Types.READ_SUCCESS: {
-            return listAdapter.addAll(action.items, { ...state, loading: false });
+            // return listAdapter.addAll(action.items, { ...state, loading: false });
+            return
         }
 
         case fromActions.Types.READ_ERROR: {

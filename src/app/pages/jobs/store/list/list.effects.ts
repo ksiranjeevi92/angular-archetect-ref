@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 
-import { firestore } from 'firebase/app';
-import { AngularFirestore } from '@angular/fire/firestore';
+// import { firestore } from 'firebase/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { Observable, from, of } from 'rxjs';
 import { map, switchMap, catchError, take } from 'rxjs/operators';
@@ -12,6 +12,7 @@ import { extractDocumentChangeActionData } from '@app/shared/utils/data';
 import { Job, JobCreateRequest } from './list.models';
 
 import * as fromActions from './list.actions';
+import { FieldValue ,serverTimestamp } from 'firebase/firestore';
 
 type Action = fromActions.All;
 
@@ -42,7 +43,7 @@ export class ListEffects {
         map((action: fromActions.Create) => action.job),
         map((job: JobCreateRequest) => ({
             ...job,
-            created: firestore.FieldValue.serverTimestamp()
+            created: serverTimestamp()
         })),
         switchMap((request: JobCreateRequest) =>
             from(this.afs.collection('jobs').add(request)).pipe(
@@ -59,7 +60,7 @@ export class ListEffects {
         map((action: fromActions.Update) => action.job),
         map((job: Job) => ({
             ...job,
-            updated: firestore.FieldValue.serverTimestamp()
+            updated: serverTimestamp()
         })),
         switchMap((job) =>
             from(this.afs.collection('jobs').doc(job.id).set(job)).pipe(

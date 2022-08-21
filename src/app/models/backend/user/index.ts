@@ -1,4 +1,5 @@
-import { firestore } from 'firebase/app';
+// import { firestore } from 'firebase/app';
+import { FieldValue, serverTimestamp } from "firebase/firestore";
 import { Employee, Recruiter } from './roles';
 
 export * from './roles';
@@ -11,6 +12,6 @@ export interface User {
     about?: string;
     roleId: string;
     role: Employee | Recruiter;
-    created: firestore.FieldValue;
-    updated?: firestore.FieldValue;
+    created: FieldValue;
+    updated?: FieldValue;
 }
