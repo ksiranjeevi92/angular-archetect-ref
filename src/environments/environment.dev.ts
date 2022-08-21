@@ -9,7 +9,7 @@ export const environment = {
             storageBucket: "cloudfirestream.appspot.com",
             messagingSenderId: "1076586885479",
             appId: "1:1076586885479:web:c979e85f7e16f7a302bfc2",
-            databaseURL: 'https://courseapp-3cbec.firebaseio.com'
+            databaseURL: 'https://cloudfirestream.firebaseio.com'
         },
         actionCodeSettings: {
             url: 'http://localhost:5200/profile/new',

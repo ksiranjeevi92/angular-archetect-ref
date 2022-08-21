@@ -3,16 +3,16 @@ export const environment = {
     name: 'prod',
     firebase: {
         config: {
-            apiKey: 'AIzaSyDm42gvMrleyMqeFBie8RDL6Y6YEY4gq5w',
-            authDomain: 'courseapp-3cbec.firebaseapp.com',
-            databaseURL: 'https://courseapp-3cbec.firebaseio.com',
-            projectId: 'courseapp-3cbec',
-            storageBucket: 'courseapp-3cbec.appspot.com',
-            messagingSenderId: '180836863766',
-            appId: '1:180836863766:web:6851bd302ae3ed12beca37'
+            apiKey: "AIzaSyDGAAPVzDhISiV0Gm8gT9dMjvdDbpE02dI",
+            authDomain: "cloudfirestream.firebaseapp.com",
+            projectId: "cloudfirestream",
+            storageBucket: "cloudfirestream.appspot.com",
+            messagingSenderId: "1076586885479",
+            appId: "1:1076586885479:web:c979e85f7e16f7a302bfc2",
+            databaseURL: 'https://cloudfirestream.firebaseio.com'
         },
         actionCodeSettings: {
-            url: 'http://localhost:5200/profile/new',
+            url: 'https://cloudfirestream.com/profile/new',
             handleCodeInApp: true
         }
     }
