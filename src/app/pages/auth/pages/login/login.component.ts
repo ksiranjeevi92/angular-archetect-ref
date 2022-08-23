@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 
@@ -19,11 +19,11 @@ export class LoginComponent implements OnInit {
 
     loading$: Observable<boolean>;
 
-    form: FormGroup;
+    form: UntypedFormGroup;
     regexErrors = regexErrors;
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private store: Store<fromRoot.State>
     ) { }
 

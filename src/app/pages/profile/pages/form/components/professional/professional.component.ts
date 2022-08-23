@@ -2,7 +2,7 @@ import {
     Component, OnInit, OnDestroy, Input, Output,
     EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef
 } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -36,13 +36,13 @@ export class ProfessionalComponent implements OnInit, OnDestroy {
 
     @Output() changed = new EventEmitter<ProfessionalForm>();
 
-    form: FormGroup;
+    form: UntypedFormGroup;
     regexErrors = regexErrors;
 
     private destroy = new Subject<any>();
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private cdr: ChangeDetectorRef,
         private stepper: StepperService
     ) { }

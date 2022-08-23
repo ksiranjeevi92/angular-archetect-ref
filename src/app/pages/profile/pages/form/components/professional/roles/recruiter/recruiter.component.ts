@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Dictionaries } from '@app/store/dictionaries';
 
 export interface RecruiterForm {
@@ -14,16 +14,16 @@ export interface RecruiterForm {
 })
 export class RecruiterComponent implements OnInit, OnDestroy {
 
-    @Input() parent: FormGroup;
+    @Input() parent: UntypedFormGroup;
     @Input() name: string;
 
     @Input() value: RecruiterForm;
     @Input() dictionaries: Dictionaries;
 
-    form: FormGroup;
+    form: UntypedFormGroup;
 
     constructor(
-        private fb: FormBuilder
+        private fb: UntypedFormBuilder
     ) { }
 
     ngOnInit(): void {

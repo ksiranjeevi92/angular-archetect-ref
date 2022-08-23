@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Dictionaries } from '@app/store/dictionaries';
 
 import { ControlEntities, mapControls } from '@app/shared/utils/form';
@@ -22,17 +22,17 @@ export interface EmployeeForm {
 })
 export class EmployeeComponent implements OnInit, OnDestroy {
 
-    @Input() parent: FormGroup;
+    @Input() parent: UntypedFormGroup;
     @Input() name: string;
 
     @Input() value: EmployeeForm;
     @Input() dictionaries: Dictionaries;
 
-    form: FormGroup;
+    form: UntypedFormGroup;
     controls: ControlEntities;
 
     constructor(
-        private fb: FormBuilder
+        private fb: UntypedFormBuilder
     ) { }
 
     ngOnInit(): void {
