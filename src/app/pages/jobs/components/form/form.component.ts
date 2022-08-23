@@ -1,5 +1,5 @@
 import { Inject, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { Store } from '@ngrx/store';
@@ -18,11 +18,11 @@ import { Job } from '../../store/list';
 })
 export class FormComponent implements OnInit {
 
-    form: FormGroup;
+    form: UntypedFormGroup;
     regexErrors = regexErrors;
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private store: Store<fromRoot.State>,
         private dialogRef: MatDialogRef<FormComponent>,
         @Inject(MAT_DIALOG_DATA) public data: { value: Job }

@@ -1,5 +1,5 @@
 import { Component, forwardRef, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor, FormBuilder, FormGroup } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 
 export interface Value {
     from: number;
@@ -28,9 +28,9 @@ export class DateRangeComponent implements OnInit, ControlValueAccessor {
     @Input() placeholder: Placeholder;
     @Output() changed = new EventEmitter<Value>();
 
-    form: FormGroup;
+    form: UntypedFormGroup;
 
-    constructor(private fb: FormBuilder) { }
+    constructor(private fb: UntypedFormBuilder) { }
 
     ngOnInit(): void {
         this.form = this.fb.group({

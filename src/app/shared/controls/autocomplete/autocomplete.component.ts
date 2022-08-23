@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, forwardRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor, FormControl } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor, UntypedFormControl } from '@angular/forms';
 
 import { Subject, Observable } from 'rxjs';
 import { takeUntil, distinctUntilChanged, startWith, map, filter } from 'rxjs/operators';
@@ -26,7 +26,7 @@ export class AutocompleteComponent implements OnInit, OnDestroy, ControlValueAcc
 
     @Output() changed = new EventEmitter<Value>();
 
-    formControl = new FormControl();
+    formControl = new UntypedFormControl();
     options$: Observable<ControlItem[]>;
 
     private destroy = new Subject<any>();

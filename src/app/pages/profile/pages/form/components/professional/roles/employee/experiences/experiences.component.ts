@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, UntypedFormArray } from '@angular/forms';
 
 export interface ExperienceForm {
     companyName: string;
@@ -18,15 +18,15 @@ interface Period {
 })
 export class ExperiencesComponent implements OnInit, OnDestroy {
 
-    @Input() public parent: FormGroup;
+    @Input() public parent: UntypedFormGroup;
     @Input() public name: string;
 
     @Input() public values: ExperienceForm[];
 
-    form: FormArray;
+    form: UntypedFormArray;
 
     constructor(
-        private fb: FormBuilder
+        private fb: UntypedFormBuilder
     ) { }
 
     ngOnInit(): void {
@@ -46,7 +46,7 @@ export class ExperiencesComponent implements OnInit, OnDestroy {
         this.parent.addControl(this.name, this.form);
     }
 
-    private getFormGroupArray(values: ExperienceForm[]): FormGroup[] {
+    private getFormGroupArray(values: ExperienceForm[]): UntypedFormGroup[] {
         if (!this.values.length) {
             return [this.getFormGroup()];
         } else {
@@ -54,7 +54,7 @@ export class ExperiencesComponent implements OnInit, OnDestroy {
         }
     }
 
-    private getFormGroup(value?: ExperienceForm): FormGroup {
+    private getFormGroup(value?: ExperienceForm): UntypedFormGroup {
         const group = this.fb.group({
             companyName: [null, {
                 updateOn: 'blur', validators: [
